@@ -3,7 +3,7 @@ guid: a84ceea550751bc419fdcd05f5c4b80b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -99,6 +99,32 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1618,7 +1644,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_145
+      name: Ground2-1
       rect:
         serializedVersion: 2
         x: 0
@@ -1647,7 +1673,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_146
+      name: Ground2-2
       rect:
         serializedVersion: 2
         x: 16
@@ -1676,7 +1702,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_147
+      name: Ground2-3
       rect:
         serializedVersion: 2
         x: 32
@@ -1705,7 +1731,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_148
+      name: Ground2-4
       rect:
         serializedVersion: 2
         x: 48
@@ -1734,7 +1760,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_149
+      name: Ground2-5
       rect:
         serializedVersion: 2
         x: 64
@@ -2256,7 +2282,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_165
+      name: Ground2-6
       rect:
         serializedVersion: 2
         x: 0
@@ -2372,7 +2398,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_169
+      name: Ground2-7
       rect:
         serializedVersion: 2
         x: 64
@@ -3126,7 +3152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_192
+      name: Ground2-8
       rect:
         serializedVersion: 2
         x: 0
@@ -3242,7 +3268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_196
+      name: Ground2-9
       rect:
         serializedVersion: 2
         x: 64
@@ -4112,7 +4138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_222
+      name: Ground2-10
       rect:
         serializedVersion: 2
         x: 0
@@ -4141,7 +4167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_223
+      name: Ground2-11
       rect:
         serializedVersion: 2
         x: 16
@@ -4170,7 +4196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_224
+      name: Ground2-12
       rect:
         serializedVersion: 2
         x: 32
@@ -4199,7 +4225,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_225
+      name: Ground2-13
       rect:
         serializedVersion: 2
         x: 48
@@ -4228,7 +4254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_226
+      name: Ground2-14
       rect:
         serializedVersion: 2
         x: 64
@@ -4924,7 +4950,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_248
+      name: struiken-1
       rect:
         serializedVersion: 2
         x: 96
@@ -4953,7 +4979,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_249
+      name: struiken-2
       rect:
         serializedVersion: 2
         x: 112
@@ -5011,7 +5037,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_250
+      name: struiken-3
       rect:
         serializedVersion: 2
         x: 128
@@ -5533,7 +5559,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_267
+      name: struiken-4
       rect:
         serializedVersion: 2
         x: 96
@@ -5562,7 +5588,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_268
+      name: struiken-9
       rect:
         serializedVersion: 2
         x: 112
@@ -5591,7 +5617,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_269
+      name: struiken-5
       rect:
         serializedVersion: 2
         x: 128
@@ -6026,7 +6052,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_282
+      name: struiken-6
       rect:
         serializedVersion: 2
         x: 96
@@ -6055,7 +6081,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_283
+      name: struiken-7
       rect:
         serializedVersion: 2
         x: 112
@@ -6084,7 +6110,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forest-1_284
+      name: struiken-8
       rect:
         serializedVersion: 2
         x: 128
@@ -14870,11 +14896,6 @@ TextureImporter:
       Forest-1_142: 1692940281
       Forest-1_143: 1625761011
       Forest-1_144: 1620504539
-      Forest-1_145: -883905326
-      Forest-1_146: -520813993
-      Forest-1_147: -1886371500
-      Forest-1_148: -316358745
-      Forest-1_149: -464370706
       Forest-1_150: -1549126013
       Forest-1_151: 701628543
       Forest-1_152: -413885815
@@ -14890,11 +14911,9 @@ TextureImporter:
       Forest-1_162: 1202767997
       Forest-1_163: 1626239271
       Forest-1_164: -1381932973
-      Forest-1_165: 973855166
       Forest-1_166: -1972563393
       Forest-1_167: -303108744
       Forest-1_168: 538650450
-      Forest-1_169: 1610499240
       Forest-1_170: 1430306969
       Forest-1_171: -1036297881
       Forest-1_172: 760883224
@@ -14917,11 +14936,9 @@ TextureImporter:
       Forest-1_189: -919563163
       Forest-1_190: -555703230
       Forest-1_191: 1386528771
-      Forest-1_192: -1954906222
       Forest-1_193: 1102255751
       Forest-1_194: 1942210887
       Forest-1_195: -481149542
-      Forest-1_196: 1979377554
       Forest-1_197: 997467786
       Forest-1_198: 1979089260
       Forest-1_199: 1713332701
@@ -14951,11 +14968,6 @@ TextureImporter:
       Forest-1_22: 1364376294
       Forest-1_220: 1489169006
       Forest-1_221: -1382292181
-      Forest-1_222: 1282705992
-      Forest-1_223: 1771191714
-      Forest-1_224: 979462665
-      Forest-1_225: -1078529545
-      Forest-1_226: -1321138778
       Forest-1_227: -1000586979
       Forest-1_228: 1733899357
       Forest-1_229: -957150533
@@ -14979,10 +14991,7 @@ TextureImporter:
       Forest-1_245: -1686360239
       Forest-1_246: 1003082543
       Forest-1_247: 252232902
-      Forest-1_248: -2112304219
-      Forest-1_249: -1595552823
       Forest-1_25: 1507885219
-      Forest-1_250: -1765081806
       Forest-1_251: -759302696
       Forest-1_252: -1921777709
       Forest-1_253: 613558819
@@ -15000,9 +15009,6 @@ TextureImporter:
       Forest-1_264: 2130947213
       Forest-1_265: 1172742126
       Forest-1_266: -1910835731
-      Forest-1_267: 1269368303
-      Forest-1_268: -1158232139
-      Forest-1_269: 1979521976
       Forest-1_27: -767002365
       Forest-1_270: -1743945735
       Forest-1_271: 138225858
@@ -15017,9 +15023,6 @@ TextureImporter:
       Forest-1_28: 948128600
       Forest-1_280: -858256176
       Forest-1_281: -1956787017
-      Forest-1_282: 916979947
-      Forest-1_283: 763006515
-      Forest-1_284: 1575130920
       Forest-1_285: 1893833808
       Forest-1_286: 1765906231
       Forest-1_287: -1227014161
@@ -15318,6 +15321,20 @@ TextureImporter:
       Ground1-7: -1792587460
       Ground1-8: -2140312571
       Ground1-9: 1069329379
+      Ground2-1: -883905326
+      Ground2-10: -1382292181
+      Ground2-11: 1282705992
+      Ground2-12: 1771191714
+      Ground2-13: 979462665
+      Ground2-14: -1078529545
+      Ground2-2: -520813993
+      Ground2-3: -1886371500
+      Ground2-4: -316358745
+      Ground2-5: -464370706
+      Ground2-6: -1381932973
+      Ground2-7: 538650450
+      Ground2-8: 1386528771
+      Ground2-9: -481149542
       WaterFall-1: -1436072779
       WaterFall-10: 175885125
       WaterFall-11: -680276239
@@ -15330,6 +15347,15 @@ TextureImporter:
       WaterFall-7: -1210158251
       WaterFall-8: -675987167
       WaterFall-9: 1347026470
+      struiken-1: 252232902
+      struiken-2: -2112304219
+      struiken-3: 1507885219
+      struiken-4: -1910835731
+      struiken-5: -1158232139
+      struiken-6: -1956787017
+      struiken-7: 916979947
+      struiken-8: 763006515
+      struiken-9: 1269368303
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
