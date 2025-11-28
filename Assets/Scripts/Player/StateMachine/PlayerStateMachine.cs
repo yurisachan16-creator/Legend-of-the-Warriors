@@ -36,6 +36,7 @@ public class PlayerStateMachine : MonoBehaviour
     public readonly int HashXVelocity = Animator.StringToHash("xVelocity");
     public readonly int HashJump = Animator.StringToHash("Jump");
     public readonly int HashAttack = Animator.StringToHash("Attack");
+    public readonly int HashComboCount = Animator.StringToHash("ComboCount");
     public readonly int HashHurt = Animator.StringToHash("Hurt");
     public readonly int HashSpell = Animator.StringToHash("Spell");
     public readonly int HashSlide = Animator.StringToHash("Slide");

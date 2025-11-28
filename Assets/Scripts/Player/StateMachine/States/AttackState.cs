@@ -87,6 +87,9 @@ public class AttackState : PlayerStateBase
         StateData.IsAttacking = false;
         _canCombo = false;
         _comboRequested = false;
+        
+        // 重置Animator的连击数参数
+        Animator.SetInteger(StateMachine.HashComboCount, 0);
     }
 
     public override bool CanTransitionTo(IPlayerState newState)
@@ -113,7 +116,12 @@ public class AttackState : PlayerStateBase
     private void ExecuteAttack()
     {
         StateData.IncrementCombo();
+        
+        // 先设置连击数，再触发攻击
+        // Animator使用ComboCount来决定播放哪个攻击动画
+        Animator.SetInteger(StateMachine.HashComboCount, StateData.ComboCount);
         SetTrigger(StateMachine.HashAttack);
+        
         Debug.Log($"攻击！连击数: {StateData.ComboCount}");
     }
 

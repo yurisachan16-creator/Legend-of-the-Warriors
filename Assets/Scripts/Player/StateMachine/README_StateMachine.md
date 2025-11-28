@@ -176,6 +176,32 @@ _states.Add(typeof(MyNewState), new MyNewState(this));
 
 连击窗口在动画的50%-90%之间，超时后连击重置。
 
+### Animator 三连击设置
+
+在Unity的Animator Controller中设置三连击需要：
+
+1. **添加参数：**
+   - `Attack` (Trigger) - 触发攻击
+   - `ComboCount` (Int) - 连击计数 (1, 2, 3)
+
+2. **创建攻击状态：**
+   - `Char_Blue_Attack01` - 第一段攻击
+   - `Char_Blue_Attack02` - 第二段攻击  
+   - `Char_Blue_Attack03` - 第三段攻击
+
+3. **设置转换条件：**
+   ```
+   Locomotion → Attack01: Attack (Trigger), ComboCount == 1
+   Attack01 → Attack02: Attack (Trigger), ComboCount == 2
+   Attack02 → Attack03: Attack (Trigger), ComboCount == 3
+   Attack01/02/03 → Locomotion: Has Exit Time (当动画播放完成)
+   ```
+
+4. **添加 ResetTriggerBehaviour：**
+   - 在每个攻击状态添加 `ResetTriggerBehaviour` 脚本
+   - 设置 `triggerName = "Attack"`
+   - 这会在进入状态时重置 Attack 触发器
+
 ### 攻击判定配置
 
 `PlayerAttackHitbox` 组件参数：
