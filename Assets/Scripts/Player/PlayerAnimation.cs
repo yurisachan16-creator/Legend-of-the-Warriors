@@ -10,6 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D _rb;
     private PhysicsCheck _physicsCheck;
+    private PlayerController _playerController;
     #endregion
 
     #region Animator 参数哈希值（性能优化）
@@ -50,6 +51,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _physicsCheck = GetComponent<PhysicsCheck>();
+        _playerController = GetComponent<PlayerController>();
 
         if (_animator == null)
         {
@@ -243,6 +245,15 @@ public class PlayerAnimation : MonoBehaviour
     public void OnLandAnimationEnd()
     {
         // 落地动画完成后的处理
+    }
+
+/// <summary>
+/// 死亡动画结束回调
+/// </summary>
+/// <param name="isDead"></param> <summary>
+    public void OnDead()
+    {
+        _playerController.PlayerDead();
     }
 
     #endregion

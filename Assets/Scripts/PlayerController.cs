@@ -25,7 +25,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashDuration = 0.2f;
     [SerializeField] private float _dashCooldown = 1f;
     private const float _inputThreshold = 0.01f;    // 输入阈值，防止微小输入导致角色移动
-    private bool _isFacingRight = true;
+    [SerializeField] private bool _isFacingRight = true;
+    [SerializeField] public bool IsHurting = false;
+    public float HurtFoce = 10f;
+    public bool IsDead = false;
 
     void Awake()
     {
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(IsHurting) return;
         MovePlayer();
     }
 
@@ -111,6 +115,24 @@ public class PlayerController : MonoBehaviour
         {
             _playerAnimation.TriggerJump();
         }
+    }
+
+    public void GetHurt(Transform attacker)
+    {
+        if(IsHurting) return;
+        IsHurting = true;
+        _rb.velocity = Vector2.zero;
+        Vector2 dir = new Vector2(transform.position.x - attacker.position.x,0).normalized;
+
+        _rb.AddForce(dir * HurtFoce, ForceMode2D.Impulse);
+
+    }
+
+    public void PlayerDead()
+    {
+        IsDead = true;
+        _inputControl.Gameplay.Disable();
+        Debug.Log("玩家已死亡，输入禁用。");
     }
 
     

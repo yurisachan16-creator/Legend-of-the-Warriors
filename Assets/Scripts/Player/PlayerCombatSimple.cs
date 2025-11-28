@@ -60,11 +60,7 @@ public class PlayerCombatSimple : MonoBehaviour
             TryAttack();
         }
 
-        // 重击 - K 键
-        if (_keyboard.kKey.wasPressedThisFrame)
-        {
-            TryHeavyAttack();
-        }
+        
 
         // 施法 - L 键
         if (_keyboard.lKey.wasPressedThisFrame)
@@ -73,7 +69,7 @@ public class PlayerCombatSimple : MonoBehaviour
         }
 
         // 滑铲 - Left Shift 键
-        if (_keyboard.leftShiftKey.wasPressedThisFrame)
+        if (_keyboard.ctrlKey.wasPressedThisFrame)
         {
             TrySlide();
         }
@@ -113,14 +109,7 @@ public class PlayerCombatSimple : MonoBehaviour
         Debug.Log("🗡️ 普通攻击！");
     }
 
-    private void TryHeavyAttack()
-    {
-        if (Time.time - _lastHeavyAttackTime < _heavyAttackCooldown) return;
-
-        _playerAnimation?.TriggerHeavyAttack();
-        _lastHeavyAttackTime = Time.time;
-        Debug.Log("⚔️ 重击！");
-    }
+    
 
     private void TrySpell()
     {
