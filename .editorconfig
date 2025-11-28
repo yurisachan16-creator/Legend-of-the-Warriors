@@ -1,0 +1,84 @@
+# 声明这是根配置文件，停止向上查找
+root = true
+
+# ============================================
+# 1. 基础文件格式 (适用于所有文件)
+# ============================================
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# ============================================
+# 2. C# 命名规范 (核心部分)
+# ============================================
+[*.cs]
+
+# --- 定义符号组 (Symbols) ---
+
+# 接口：必须以 I 开头
+dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
+dotnet_naming_symbols.interface_symbols.applicable_accessibilities = *
+
+# 私有字段：只针对 private 且非 const 的字段
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.required_modifiers = !const
+
+# 公共字段/属性/方法/类：适用于大多数量
+dotnet_naming_symbols.public_members.applicable_kinds = property, method, field, event, class, struct, enum, delegate
+dotnet_naming_symbols.public_members.applicable_accessibilities = public, internal, protected, protected_internal, private_protected
+
+# 局部变量和参数
+dotnet_naming_symbols.locals_and_params.applicable_kinds = local, parameter
+dotnet_naming_symbols.locals_and_params.applicable_accessibilities = *
+
+# --- 定义命名风格 (Styles) ---
+
+# PascalCase: 首字母大写 (如 PlayerController)
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+# camelCase: 首字母小写 (如 damageAmount)
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+# I_Pascal: I 前缀 + 首字母大写 (如 IDamageable)
+dotnet_naming_style.i_prefix_style.capitalization = pascal_case
+dotnet_naming_style.i_prefix_style.required_prefix = I
+
+# _camelCase: 下划线前缀 + 首字母小写 (如 _moveSpeed)
+dotnet_naming_style.underscore_camel_style.capitalization = camel_case
+dotnet_naming_style.underscore_camel_style.required_prefix = _
+
+# --- 将符号与风格绑定 (Rules) ---
+
+# 规则 1: 接口必须遵循 I_Pascal 风格
+dotnet_naming_rule.interface_should_be_pascal.symbols = interface_symbols
+dotnet_naming_rule.interface_should_be_pascal.style = i_prefix_style
+dotnet_naming_rule.interface_should_be_pascal.severity = warning
+
+# 规则 2: 【重点】私有字段必须遵循 _camelCase 风格
+dotnet_naming_rule.private_fields_should_be_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_underscore.style = underscore_camel_style
+dotnet_naming_rule.private_fields_should_be_underscore.severity = warning
+
+# 规则 3: 大多数公开成员遵循 PascalCase 风格
+dotnet_naming_rule.public_members_should_be_pascal.symbols = public_members
+dotnet_naming_rule.public_members_should_be_pascal.style = pascal_case_style
+dotnet_naming_rule.public_members_should_be_pascal.severity = warning
+
+# 规则 4: 局部变量和参数遵循 camelCase 风格
+dotnet_naming_rule.locals_should_be_camel.symbols = locals_and_params
+dotnet_naming_rule.locals_should_be_camel.style = camel_case_style
+dotnet_naming_rule.locals_should_be_camel.severity = warning
+
+# ============================================
+# 3. 代码格式化规则 (可选，保持代码整洁)
+# ============================================
+
+# 大括号换行 (C# 标准习惯)
+csharp_new_line_before_open_brace = all
+# using 排序放在命名空间之外
+csharp_using_directive_placement = outside_namespace:warning
