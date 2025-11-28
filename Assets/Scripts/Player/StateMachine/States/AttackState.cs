@@ -97,7 +97,13 @@ public class AttackState : PlayerStateBase
             return true;
         }
 
-        // 攻击状态不能直接被其他状态打断
+        // 攻击动画结束后允许转换到其他状态
+        if (StateData.StateTimer >= _attackDuration)
+        {
+            return true;
+        }
+
+        // 攻击动画未结束时，不能直接被其他状态打断
         return false;
     }
 

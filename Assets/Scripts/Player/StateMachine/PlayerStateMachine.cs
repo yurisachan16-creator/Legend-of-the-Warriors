@@ -250,7 +250,16 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (!_stateData.IsDead && PhysicsCheck.IsGrounded && !_stateData.IsHurting)
         {
-            ChangeState<AttackState>();
+            // 如果已经在攻击状态，请求连击
+            if (_stateData.IsAttacking)
+            {
+                var attackState = GetState<AttackState>();
+                attackState?.RequestCombo();
+            }
+            else
+            {
+                ChangeState<AttackState>();
+            }
         }
     }
 
