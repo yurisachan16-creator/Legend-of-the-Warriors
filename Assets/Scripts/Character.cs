@@ -16,9 +16,13 @@ public class Character : MonoBehaviour
 
     public UnityEvent<Transform> OnTakeDamage;
 
+    // 缓存组件引用
+    private Rigidbody2D _rigidbody;
+
     void Awake()
     {
         CurrentHealth = MaxHealth;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -47,6 +51,45 @@ public class Character : MonoBehaviour
 
         
         
+    }
+
+    /// <summary>
+    /// 使用AttackData结构接收伤害（支持状态机系统）
+    /// </summary>
+    public void TakeDamage(AttackData attackData)
+    {
+        if(IsInvincible) return;
+
+        if(CurrentHealth - attackData.Damage > 0)
+        {
+            CurrentHealth -= attackData.Damage;
+            Debug.Log($"{gameObject.name} 受到 {attackData.Damage} 点伤害，当前生命值：{CurrentHealth}/{MaxHealth}");
+            TriggerInvulnerable();
+            
+            // 应用击退效果
+            ApplyKnockback(attackData.KnockbackDirection, attackData.KnockbackForce);
+            
+            // 执行受伤事件
+            OnTakeDamage?.Invoke(attackData.Attacker);
+        }
+        else
+        {
+            CurrentHealth = 0;
+            Debug.Log($"{gameObject.name} 受到 {attackData.Damage} 点伤害，当前生命值：{CurrentHealth}/{MaxHealth}");
+            Die();
+        }
+    }
+
+    /// <summary>
+    /// 应用击退效果
+    /// </summary>
+    private void ApplyKnockback(Vector2 direction, float force)
+    {
+        if(_rigidbody != null)
+        {
+            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.AddForce(direction * force, ForceMode2D.Impulse);
+        }
     }
 
     private void Die()
