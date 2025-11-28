@@ -19,9 +19,13 @@ public class PlayerStateData
     [Header("滑铲参数")]
     public float SlideSpeed = 15f;
     public float SlideDuration = 0.5f;
+    public float SlideEndSpeedMultiplier = 0.5f;
 
     [Header("攀爬参数")]
     public float ClimbSpeed = 3f;
+
+    [Header("空中控制参数")]
+    public float AirControl = 0.8f;
 
     [Header("受伤参数")]
     public float HurtForce = 10f;
@@ -32,6 +36,8 @@ public class PlayerStateData
     public int MaxCombo = 3;
     public float ComboResetTime = 1f;
     public float LastAttackTime;
+    public float AttackComboWindowStart = 0.5f;
+    public float AttackComboWindowEnd = 0.9f;
 
     [Header("状态标志")]
     public bool IsFacingRight = true;

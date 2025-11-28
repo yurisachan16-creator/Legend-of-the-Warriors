@@ -56,7 +56,7 @@ public class SlideState : PlayerStateBase
 
         // 滑铲时保持滑铲速度（随时间衰减）
         float progress = StateData.StateTimer / StateData.SlideDuration;
-        float currentSpeed = Mathf.Lerp(StateData.SlideSpeed, StateData.MoveSpeed * 0.5f, progress);
+        float currentSpeed = Mathf.Lerp(StateData.SlideSpeed, StateData.MoveSpeed * StateData.SlideEndSpeedMultiplier, progress);
         Rigidbody.velocity = new Vector2(_slideDirection * currentSpeed, Rigidbody.velocity.y);
     }
 

@@ -59,8 +59,7 @@ public class JumpState : PlayerStateBase
         base.FixedUpdate();
 
         // 空中移动控制（可以左右调整）
-        float airControl = 0.8f; // 空中控制系数
-        float targetVelocityX = GetHorizontalInput() * StateData.MoveSpeed * airControl;
+        float targetVelocityX = GetHorizontalInput() * StateData.MoveSpeed * StateData.AirControl;
         Rigidbody.velocity = new Vector2(targetVelocityX, Rigidbody.velocity.y);
     }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class DeathState : PlayerStateBase
 {
+    private bool _allowRespawn = false;
+
     public DeathState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
@@ -12,6 +14,7 @@ public class DeathState : PlayerStateBase
         base.Enter();
 
         StateData.IsDead = true;
+        _allowRespawn = false;
 
         // 设置死亡动画
         SetBool(StateMachine.HashIsDead, true);
@@ -41,13 +44,35 @@ public class DeathState : PlayerStateBase
     {
         base.Exit();
         StateData.IsDead = false;
+        _allowRespawn = false;
         SetBool(StateMachine.HashIsDead, false);
         StateMachine.EnableInput();
     }
 
     public override bool CanTransitionTo(IPlayerState newState)
     {
-        // 死亡状态不能转换到任何其他状态（除非重生逻辑）
+        // 死亡状态只有在允许重生时才能转换到待机状态
+        if (_allowRespawn && newState is IdleState)
+        {
+            return true;
+        }
         return false;
+    }
+
+    /// <summary>
+    /// 允许重生（由重生系统调用）
+    /// </summary>
+    public void AllowRespawn()
+    {
+        _allowRespawn = true;
+    }
+
+    /// <summary>
+    /// 执行重生
+    /// </summary>
+    public void Respawn()
+    {
+        _allowRespawn = true;
+        StateMachine.ChangeState<IdleState>();
     }
 }

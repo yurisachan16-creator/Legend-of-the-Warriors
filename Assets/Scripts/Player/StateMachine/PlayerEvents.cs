@@ -8,17 +8,34 @@ public class PlayerEvents : MonoBehaviour
 {
     // 单例实例
     private static PlayerEvents _instance;
+    private static readonly object _lock = new object();
+    private static bool _isApplicationQuitting = false;
+
     public static PlayerEvents Instance
     {
         get
         {
-            if (_instance == null)
+            if (_isApplicationQuitting)
             {
-                var go = new GameObject("PlayerEvents");
-                _instance = go.AddComponent<PlayerEvents>();
-                DontDestroyOnLoad(go);
+                return null;
             }
-            return _instance;
+
+            lock (_lock)
+            {
+                if (_instance == null)
+                {
+                    // 先尝试在场景中找到已存在的实例
+                    _instance = FindAnyObjectByType<PlayerEvents>();
+                    
+                    if (_instance == null)
+                    {
+                        var go = new GameObject("PlayerEvents");
+                        _instance = go.AddComponent<PlayerEvents>();
+                        DontDestroyOnLoad(go);
+                    }
+                }
+                return _instance;
+            }
         }
     }
 
@@ -159,6 +176,19 @@ public class PlayerEvents : MonoBehaviour
         else if (_instance != this)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        _isApplicationQuitting = true;
+    }
+
+    void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
         }
     }
 }

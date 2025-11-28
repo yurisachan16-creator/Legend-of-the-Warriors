@@ -26,16 +26,11 @@ public class AttackState : PlayerStateBase
             StateData.ResetCombo();
         }
 
-        // 增加连击计数
-        StateData.IncrementCombo();
-
-        // 触发攻击动画
-        SetTrigger(StateMachine.HashAttack);
+        // 执行攻击
+        ExecuteAttack();
 
         // 攻击时停止移动
         Rigidbody.velocity = new Vector2(0, Rigidbody.velocity.y);
-
-        Debug.Log($"攻击！连击数: {StateData.ComboCount}");
     }
 
     public override void Update()
@@ -45,7 +40,9 @@ public class AttackState : PlayerStateBase
         StateData.StateTimer += Time.deltaTime;
 
         // 在攻击动画中段允许接收下一次攻击输入
-        if (StateData.StateTimer > _attackDuration * 0.5f && StateData.StateTimer < _attackDuration * 0.9f)
+        float comboWindowStart = _attackDuration * StateData.AttackComboWindowStart;
+        float comboWindowEnd = _attackDuration * StateData.AttackComboWindowEnd;
+        if (StateData.StateTimer > comboWindowStart && StateData.StateTimer < comboWindowEnd)
         {
             _canCombo = true;
         }
@@ -60,9 +57,7 @@ public class AttackState : PlayerStateBase
                 StateData.StateTimer = 0f;
                 _canCombo = false;
                 _comboRequested = false;
-                StateData.IncrementCombo();
-                SetTrigger(StateMachine.HashAttack);
-                Debug.Log($"连击！连击数: {StateData.ComboCount}");
+                ExecuteAttack();
             }
             else
             {
@@ -104,6 +99,16 @@ public class AttackState : PlayerStateBase
 
         // 攻击状态不能直接被其他状态打断
         return false;
+    }
+
+    /// <summary>
+    /// 执行攻击（增加连击计数并触发动画）
+    /// </summary>
+    private void ExecuteAttack()
+    {
+        StateData.IncrementCombo();
+        SetTrigger(StateMachine.HashAttack);
+        Debug.Log($"攻击！连击数: {StateData.ComboCount}");
     }
 
     /// <summary>
