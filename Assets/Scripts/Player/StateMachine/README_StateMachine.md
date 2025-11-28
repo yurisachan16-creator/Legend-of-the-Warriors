@@ -174,7 +174,7 @@ _states.Add(typeof(MyNewState), new MyNewState(this));
 2. 第二次攻击：1.2倍伤害
 3. 第三次攻击：1.5倍伤害
 
-连击窗口在动画的50%-90%之间，超时后连击重置。
+玩家在0.9秒窗口期内按攻击键可以触发下一段连击。
 
 ### Animator 三连击设置
 
@@ -182,7 +182,7 @@ _states.Add(typeof(MyNewState), new MyNewState(this));
 
 1. **添加参数：**
    - `Attack` (Trigger) - 触发攻击
-   - `ComboCount` (Int) - 连击计数 (1, 2, 3)
+   - `IsAttack` (Bool) - 是否处于攻击状态
 
 2. **创建攻击状态：**
    - `Char_Blue_Attack01` - 第一段攻击
@@ -191,16 +191,26 @@ _states.Add(typeof(MyNewState), new MyNewState(this));
 
 3. **设置转换条件：**
    ```
-   Locomotion → Attack01: Attack (Trigger), ComboCount == 1
-   Attack01 → Attack02: Attack (Trigger), ComboCount == 2
-   Attack02 → Attack03: Attack (Trigger), ComboCount == 3
-   Attack01/02/03 → Locomotion: Has Exit Time (当动画播放完成)
+   Locomotion → Attack01: IsAttack == true, Attack (Trigger)
+   Attack01 → Attack02: Attack (Trigger)
+   Attack02 → Attack03: Attack (Trigger)
+   Attack01 → Locomotion: IsAttack == false (Has Exit Time)
+   Attack02 → Locomotion: IsAttack == false (Has Exit Time)
+   Attack03 → Locomotion: IsAttack == false (Has Exit Time)
    ```
 
 4. **添加 ResetTriggerBehaviour：**
    - 在每个攻击状态添加 `ResetTriggerBehaviour` 脚本
    - 设置 `triggerName = "Attack"`
-   - 这会在进入状态时重置 Attack 触发器
+   - 这会在进入状态时重置 Attack 触发器，玩家必须再次按键才能触发下一段
+
+### 攻击流程说明
+
+1. 按下攻击键 → `IsAttack = true`, `Attack` 触发 → 进入 `Attack01`
+2. 在0.9秒内再按攻击键 → `Attack` 触发 → 进入 `Attack02`
+3. 如果不按键 → 动画结束 → `IsAttack = false` → 返回 `Locomotion`
+4. `Attack02` → `Attack03` 同理
+5. `Attack03` 结束后 → `IsAttack = false` → 返回 `Locomotion`
 
 ### 攻击判定配置
 

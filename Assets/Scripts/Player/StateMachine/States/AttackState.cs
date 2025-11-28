@@ -2,11 +2,11 @@ using UnityEngine;
 
 /// <summary>
 /// 攻击状态 - 玩家攻击时的状态（支持三连击）
+/// 使用 IsAttack (Bool) 和 Attack (Trigger) 控制
 /// </summary>
 public class AttackState : PlayerStateBase
 {
-    private float _attackDuration = 0.4f; // 攻击动画持续时间
-    private bool _canCombo = false;
+    private float _attackDuration = 0.9f; // 攻击动画持续时间（0.9秒窗口期）
     private bool _comboRequested = false;
 
     public AttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
@@ -17,7 +17,6 @@ public class AttackState : PlayerStateBase
 
         StateData.IsAttacking = true;
         StateData.StateTimer = 0f;
-        _canCombo = false;
         _comboRequested = false;
 
         // 检查连击超时，重置连击计数
@@ -39,37 +38,21 @@ public class AttackState : PlayerStateBase
 
         StateData.StateTimer += Time.deltaTime;
 
-        // 在攻击动画中段允许接收下一次攻击输入
-        float comboWindowStart = _attackDuration * StateData.AttackComboWindowStart;
-        float comboWindowEnd = _attackDuration * StateData.AttackComboWindowEnd;
-        if (StateData.StateTimer > comboWindowStart && StateData.StateTimer < comboWindowEnd)
-        {
-            _canCombo = true;
-        }
-
-        // 攻击动画结束
+        // 攻击动画结束（0.9秒窗口期）
         if (StateData.StateTimer >= _attackDuration)
         {
             // 检查是否请求了连击
             if (_comboRequested && StateData.ComboCount < StateData.MaxCombo)
             {
-                // 继续攻击（重新进入攻击状态）
+                // 继续攻击（重新进入下一段攻击）
                 StateData.StateTimer = 0f;
-                _canCombo = false;
                 _comboRequested = false;
                 ExecuteAttack();
             }
             else
             {
                 // 攻击结束，返回待机或移动
-                if (HasMoveInput())
-                {
-                    StateMachine.ChangeState<MoveState>();
-                }
-                else
-                {
-                    StateMachine.ChangeState<IdleState>();
-                }
+                EndAttack();
             }
         }
     }
@@ -85,11 +68,13 @@ public class AttackState : PlayerStateBase
     {
         base.Exit();
         StateData.IsAttacking = false;
-        _canCombo = false;
         _comboRequested = false;
         
-        // 重置Animator的连击数参数
-        Animator.SetInteger(StateMachine.HashComboCount, 0);
+        // 重置Animator的IsAttack参数
+        Animator.SetBool(StateMachine.HashIsAttack, false);
+        
+        // 重置连击计数
+        StateData.ResetCombo();
     }
 
     public override bool CanTransitionTo(IPlayerState newState)
@@ -117,12 +102,33 @@ public class AttackState : PlayerStateBase
     {
         StateData.IncrementCombo();
         
-        // 先设置连击数，再触发攻击
-        // Animator使用ComboCount来决定播放哪个攻击动画
-        Animator.SetInteger(StateMachine.HashComboCount, StateData.ComboCount);
+        // 设置 IsAttack = true 并触发 Attack
+        Animator.SetBool(StateMachine.HashIsAttack, true);
         SetTrigger(StateMachine.HashAttack);
         
         Debug.Log($"攻击！连击数: {StateData.ComboCount}");
+    }
+
+    /// <summary>
+    /// 结束攻击状态
+    /// </summary>
+    private void EndAttack()
+    {
+        // 设置 IsAttack = false
+        Animator.SetBool(StateMachine.HashIsAttack, false);
+        
+        // 重置连击
+        StateData.ResetCombo();
+        
+        // 返回待机或移动
+        if (HasMoveInput())
+        {
+            StateMachine.ChangeState<MoveState>();
+        }
+        else
+        {
+            StateMachine.ChangeState<IdleState>();
+        }
     }
 
     /// <summary>
@@ -130,9 +136,11 @@ public class AttackState : PlayerStateBase
     /// </summary>
     public void RequestCombo()
     {
-        if (_canCombo && StateData.ComboCount < StateData.MaxCombo)
+        // 在连击数限制内可以请求连击
+        if (StateData.ComboCount < StateData.MaxCombo)
         {
             _comboRequested = true;
+            Debug.Log($"连击请求！当前连击数: {StateData.ComboCount}");
         }
     }
 }
