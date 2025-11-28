@@ -1,5 +1,106 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3038664188566780213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2389349362064988091}
+  - component: {fileID: 8994170452900110158}
+  - component: {fileID: 1446052673993025170}
+  m_Layer: 10
+  m_Name: AttackHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2389349362064988091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038664188566780213}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8013458731845530518}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8994170452900110158
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038664188566780213}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1446052673993025170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038664188566780213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543d58a5e9935646b23a83cf03d3866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseDamage: 10
+  _knockbackForce: 5
+  _knockbackDirection: {x: 1, y: 0.5}
+  _comboDamageMultipliers:
+  - 1
+  - 1.2
+  - 1.5
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _showDebugInfo: 0
 --- !u!1 &9108028524343020212
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,12 +113,9 @@ GameObject:
   - component: {fileID: 2482374867315721946}
   - component: {fileID: 7382125160756279267}
   - component: {fileID: 992971805466749228}
-  - component: {fileID: 7660419408662123160}
   - component: {fileID: 2581421325134793691}
   - component: {fileID: 4372653428270897343}
-  - component: {fileID: 964387728233432664}
-  - component: {fileID: 6280707671054621815}
-  - component: {fileID: 2970491309855035441}
+  - component: {fileID: 2204684601731625711}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -37,7 +135,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2389349362064988091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2482374867315721946
@@ -154,24 +253,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.9}
   m_Size: {x: 1, y: 1.8}
   m_Direction: 0
---- !u!114 &7660419408662123160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9108028524343020212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d751b41e5c9a34d9ed34ff121e1455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inputDirection: {x: 0, y: 0}
-  _moveSpeed: 5
-  _jumpForce: 20
-  _dashSpeed: 20
-  _dashDuration: 0.2
-  _dashCooldown: 1
 --- !u!95 &2581421325134793691
 Animator:
   serializedVersion: 5
@@ -211,7 +292,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   IsGrounded: 0
---- !u!114 &964387728233432664
+--- !u!114 &2204684601731625711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,45 +301,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 9108028524343020212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f1bd77d0df7b34e96e63bd3401e435, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b032cf819da8be479d92e65b8ff710a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSliding: 0
-  _isClimbing: 0
-  _isDead: 0
-  _isBlocking: 0
-  _currentXVelocity: 0
-  _currentYVelocity: 0
-  _currentIsGround: 0
---- !u!114 &6280707671054621815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9108028524343020212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df2a4a1a7d015740bb843bb7efbcb69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackCooldown: 0.5
-  _heavyAttackCooldown: 1
-  _spellCooldown: 2
-  _slideCooldown: 1.5
---- !u!114 &2970491309855035441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9108028524343020212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d207c58fc1feca94f88c7436825950fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 0
-  InvincibleDuration: 1
-  IsInvincible: 0
+  _stateData:
+    InputDirection: {x: 0, y: 0}
+    InputThreshold: 0.01
+    MoveSpeed: 5
+    JumpForce: 15
+    SlideSpeed: 15
+    SlideDuration: 0.5
+    SlideEndSpeedMultiplier: 0.5
+    ClimbSpeed: 3
+    AirControl: 0.8
+    HurtForce: 10
+    HurtDuration: 0.3
+    ComboCount: 0
+    MaxCombo: 3
+    ComboResetTime: 1
+    LastAttackTime: 0
+    AttackComboWindowStart: 0.5
+    AttackComboWindowEnd: 0.9
+    IsFacingRight: 1
+    IsHurting: 0
+    IsDead: 0
+    IsSliding: 0
+    IsClimbing: 0
+    IsAttacking: 0
+    StateTimer: 0
