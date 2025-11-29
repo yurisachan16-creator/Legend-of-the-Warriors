@@ -259,6 +259,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
             else
             {
+                // 不在攻击状态，开始新的攻击
                 ChangeState<AttackState>();
             }
         }
